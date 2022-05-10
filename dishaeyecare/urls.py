@@ -18,9 +18,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# URLs for Built in Admin
 urlpatterns = [
     path('admin/', admin.site.urls),
+]
+
+# URLs for the Authentication app
+urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
+]
+
+# URLs for the Uers app
+urlpatterns += [
     path('users/', include('users.urls', namespace='users')),
 ]
 
