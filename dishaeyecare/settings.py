@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3rd party apps
-    # 'phonenumber_field',
+    'phonenumber_field',
     'widget_tweaks',
 
     # Local apps
@@ -156,4 +156,4 @@ PHONENUMBER_DEFAULT_REGION = 'IN'
 django_on_heroku.settings(locals())
 
 
-CSRF_TRUSTED_ORIGINS = [ 'https://disha-eye-care.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://disha-eye-care.herokuapp.com']
