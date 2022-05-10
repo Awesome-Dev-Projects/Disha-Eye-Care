@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'users',
+    'patient',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +146,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PHONENUMBER_DEFAULT_REGION = 'IN'
 
 django_on_heroku.settings(locals())
 
