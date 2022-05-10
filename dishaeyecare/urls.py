@@ -30,6 +30,9 @@ urlpatterns+=[
 ]
 
 # URLs for Doctor App ( Doctor )
+urlpatterns+=[
+    path('doctor/', include('doctor.urls', namespace='doctor')),
+]
 
 # URLs for Patient App ( Patient )
 urlpatterns+=[
