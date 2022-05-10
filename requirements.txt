@@ -5,7 +5,6 @@ dj-database-url==0.5.0
 Django==4.0.4
 django-on-heroku==1.1.2
 django-widget-tweaks==1.4.12
-pkg_resources==0.0.0
 psycopg2-binary==2.9.3
 pycodestyle==2.8.0
 sqlparse==0.4.2
