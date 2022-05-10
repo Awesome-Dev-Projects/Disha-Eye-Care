@@ -39,6 +39,11 @@ urlpatterns+=[
     path('patient/', include('patient.urls', namespace='patient')),
 ]
 
+# URLs for Receptionist App ( Receptionist )
+urlpatterns+=[
+    path('receptionist/', include('receptionist.urls', namespace='receptionist')),
+]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
