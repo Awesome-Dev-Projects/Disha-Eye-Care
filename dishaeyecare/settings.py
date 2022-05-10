@@ -149,6 +149,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_on_heroku.settings(locals())
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://heroku-testproject-2.herokuapp.com', 'https://disha-eye-clinic.herokuapp.com']
-
+CSRF_TRUSTED_ORIGINS = [ 'https://disha-eye-care.herokuapp.com/']
