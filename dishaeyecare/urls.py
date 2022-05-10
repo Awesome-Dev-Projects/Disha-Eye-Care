@@ -29,6 +29,13 @@ urlpatterns+=[
     path('', include('clinic.urls', namespace='clinic')),
 ]
 
+# URLs for Doctor App ( Doctor )
+
+# URLs for Patient App ( Patient )
+urlpatterns+=[
+    path('patient/', include('patient.urls', namespace='patient')),
+]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
