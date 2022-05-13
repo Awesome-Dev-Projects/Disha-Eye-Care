@@ -1,0 +1,345 @@
+{% extends "base/client/base.html" %}
+{% load static %} 
+{% block head %}
+<style>
+    .our-doctor-container{
+        /* padding: 2rem 22rem; */
+        background-color: white;
+    }
+    .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
+    .contact-title{
+        color: aliceblue ;
+    }
+    .our-doctor-info-container{
+        /* background-color: #f9f9f9; */
+        /* padding: 2rem 4rem; */
+        /* max-width: 900px; */
+        /* width: 600px; */
+        padding: 4rem 11rem;
+        margin: 2rem auto;
+        /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        border-radius: 10px; */
+        display: flex;
+        flex-direction: column;
+    }
+    .row{
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 1rem;
+    }
+    .card{
+        width: 100%;
+        min-height: 200px;
+        /* max-height: 300px; */
+        background-color: #f8f6eed5;
+        padding:1rem 2rem;
+        border-radius: 10px;
+        /* border: 1px solid gainsboro; */
+        /* box-shadow: rgba(120, 146, 179, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+        transition: all 0.3s ease-in-out;
+    }
+    .card:hover{
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        
+        /* border: 1px solid rgb(175, 170, 170); */
+        /* border-left: 8px solid #333; */
+        transform: translateY(-5px);
+    }
+    .card h3{
+        /* color: #337ab7; */
+        /* font-size: 1.5rem; */
+        font-weight: bold;
+    }
+    .card p{
+        color: #333;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
+    .card .fa{
+       /* margin-right: 1rem; */
+    }
+    .img-responsive{
+        width: 70%;
+        height: auto;
+        z-index: 10;
+    }
+    @media screen and (max-width: 768px){
+        .contact-info-container{
+            padding: 2rem 1rem;
+        }
+        .row{
+            flex-direction: column;
+            margin: 1rem 2rem;
+        }
+        .card + .card{
+            margin-top: 2rem;
+        }
+        
+    }
+
+    :root {
+  --polka-bg-image:
+    radial-gradient(rgb(29, 161, 242) 10%, transparent 10%),
+    radial-gradient(rgb(29, 161, 242) 10%, transparent 10%);
+  --polka-bg-position: 0px 0px, 8px 8px;
+  --polka-bg-size: 16px 16px;
+  --polka-bg-color: rgb(255, 255, 255);
+}
+
+/* ...or add this class to an element */
+.polka {
+    background-color: transparent;
+    background-image: radial-gradient(circle, #bad3e3 20%, transparent 50%), radial-gradient(circle, #B7CADB 20%, transparent 50%);
+    background-size: 4px 4px;
+    background-position: 0 0, 100px 100px;
+    /* border-radius: 8px; */
+}
+.col-img{
+    position: relative;
+    z-index: 10;
+}
+.img-dotted-corner-right{
+    /* width: 200px;
+    height: 150px; */
+    padding: 2rem 5rem;
+    position: absolute;
+    top: -50px;
+    left: -20px;
+    z-index: 1;
+}
+.img-dotted-corner-top{
+    /* width: 200px;
+    height: 150px; */
+    padding: 6rem 2rem;
+    position: absolute;
+    top: 0px;
+    left: -40px;
+    z-index: 1;
+}
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  background-color: #eef2f695;
+  border: 0;
+  height: 2px;
+}
+.img-pillars{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.img-achievements{
+    width: 180px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: contain;
+    background-color: #f9f9f9;
+    border: 1px solid gainsboro;
+    
+}
+.fa{
+    font-size: 2rem;
+    color: #333;
+    padding:8px 10px;
+    margin: 0;
+    border-radius: 50%;
+    transition: all 0.4s ease-in-out;
+}
+.fa-facebook-f{
+    color: #3b5998;
+}
+.fa-linkedin{
+    color: #0077B5;
+}
+.fa-instagram{
+    color: #e1306c;
+}
+.fa-facebook-f:hover{
+    color: white;
+    background-color: #3b5998;
+    border-radius: 50%;
+}
+.fa-linkedin:hover{
+    color: white;
+    background-color: #0077B5;
+    border-radius: 50%;
+}
+.fa-instagram:hover{
+    color: white;
+    background-color: #e1306c;
+    border-radius: 50%;
+}
+.doctor-achivements-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.col-achievement-title{
+    flex: 0.4;
+}
+.col-achievement-images{
+    /* flex: 0.4; */
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+}
+.col-achievement-images-row{
+    /* flex: 0.8; */
+    width: 100%;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    column-gap: 1rem;
+    margin-bottom: 2rem;
+}
+</style>
+
+{% endblock %}
+ {% block content %}
+    <div class="our-doctor-container">
+        <div class="breadcumb-title-div">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"> Doctors</li>
+            </ol>
+          </nav>
+          <h2>
+              <strong>Our Doctors</strong>
+          </h2>
+        </div>
+          <div class="our-doctor-info-container">
+            
+            <div class="row">
+                <div class="col-md-6 col-img">
+                    <img src="{% static 'img/clinic/undraw_doctors_hwty.svg' %}" class="img-responsive" alt="contact us" />
+                    <!-- <div class="img-dotted-corner-right polka">
+                        <div class="img-dotted-corner-top polka"></div>
+                       
+                    </div> -->
+                     
+                  </div>
+                <div class="col-md-6">
+                    <h2 >
+                      Specialists in multiple fields of Eye Care
+                    </h2>
+                    <p>
+                        Our doctors are well-qualified and experienced in their respective fields. We have a team of highly trained doctors who are dedicated to providing the best possible care to our patients.
+                    </p>
+                </div>
+                
+              </div>
+              <hr>
+              <h4>Our Specialists</h4>
+              <div class="row" style="margin-top: 4rem">
+                {% for doctor in doctors %}
+                <div class="col-md-4 card">
+                    <div class="row">
+                        <img src="{{ doctor.profile_image.url }}" class="img-responsive img-pillars" alt="founder" />
+                        <div class="fa-container">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <h3>
+                        {{ doctor.full_name }}
+                    </h3>
+                    <h5>
+                       {{ doctor.specialization }}
+                        </h5>
+                        <h6>
+                            {{ doctor.qualification }}
+                        </h6>
+                        <p>
+                            Fees : <strong> &#8377 {{ doctor.fees }}</strong>
+                        </p>
+                        <p>
+                            Time : <strong> {{ doctor.timings }}</strong>
+                        </p>
+                </div>
+               {% endfor %}
+                <!-- <div class="col-md-4 card">
+                    <div class="row">
+                        <img src="https://images.unsplash.com/photo-1605884636476-ec4bd6c8d958?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Zm91bmRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" class="img-responsive img-pillars" alt="founder" />
+                        <div class="fa-container">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <h3>
+
+                       Nayra Al-Safadi
+                    </h3>
+                    <h5>
+                       Co-Founder
+                        </h5>
+                </div>
+                <div class="col-md-4 card">
+                    <div class="row">
+                        <img src="https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" class="img-responsive img-pillars" alt="founder" />
+                        <div class="fa-container">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <h3>
+
+                       John Albert Porto
+                    </h3>
+                    <h5>
+                       Chairman
+                        </h5>
+                </div> -->
+            </div>
+
+            <div class="doctor-achivements-row" style="margin-top: 4rem">
+                <div class="col-achievement-title">
+                    <h2>
+                        Our Doctors Achievements
+                    </h2>
+                </div>
+              <div class="col-achievement-images">
+                  <div class="col-achievement-images-row">
+                      <img src="https://demo.themefisher.com/novena/images/about/3.png" class="img-responsive img-achievements" alt="founder" />
+                      <img src="https://demo.themefisher.com/novena/images/about/4.png" class="img-responsive img-achievements" alt="founder" />
+                      <img src="https://demo.themefisher.com/novena/images/about/1.png" class="img-responsive img-achievements" alt="founder" />
+                  </div>
+                  <div class="col-achievement-images-row">
+                    <img src="https://demo.themefisher.com/novena/images/about/2.png" class="img-responsive img-achievements" alt="founder" />
+                    <img src="https://demo.themefisher.com/novena/images/about/5.png" class="img-responsive img-achievements" alt="founder" />
+                    <img src="https://demo.themefisher.com/novena/images/about/6.png" class="img-responsive img-achievements" alt="founder" />
+                </div>
+              </div>
+             
+           
+          </div>
+          </div>
+          
+    </div>
+
+ {% endblock %}

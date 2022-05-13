@@ -1,0 +1,337 @@
+{% extends "base/client/base.html" %}
+{% load static %} 
+{% block head %}
+<style>
+    .about-us-container{
+        /* padding: 2rem 22rem; */
+        background-color: white;
+    }
+    .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
+    .contact-title{
+        color: aliceblue ;
+    }
+    .about-us-info-container{
+        /* background-color: #f9f9f9; */
+        /* padding: 2rem 4rem; */
+        /* max-width: 900px; */
+        /* width: 600px; */
+        padding: 4rem 11rem;
+        margin: 2rem auto;
+        /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        border-radius: 10px; */
+        display: flex;
+        flex-direction: column;
+    }
+    .row{
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 1rem;
+    }
+    .card{
+        width: 100%;
+        min-height: 200px;
+        max-height: 300px;
+        background-color: #f8f6eed5;
+        padding:1rem 2rem;
+        border-radius: 10px;
+        /* border: 1px solid gainsboro; */
+        /* box-shadow: rgba(120, 146, 179, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+        transition: all 0.3s ease-in-out;
+    }
+    .card:hover{
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        
+        /* border: 1px solid rgb(175, 170, 170); */
+        /* border-left: 8px solid #333; */
+        transform: translateY(-5px);
+    }
+    .card h3{
+        /* color: #337ab7; */
+        /* font-size: 1.5rem; */
+        font-weight: bold;
+    }
+    .card p{
+        color: #333;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
+    .card .fa{
+       /* margin-right: 1rem; */
+    }
+    .img-responsive{
+        width: 70%;
+        height: auto;
+        z-index: 10;
+    }
+    @media screen and (max-width: 768px){
+        .contact-info-container{
+            padding: 2rem 1rem;
+        }
+        .row{
+            flex-direction: column;
+            margin: 1rem 2rem;
+        }
+        .card + .card{
+            margin-top: 2rem;
+        }
+        
+    }
+
+    :root {
+  --polka-bg-image:
+    radial-gradient(rgb(29, 161, 242) 10%, transparent 10%),
+    radial-gradient(rgb(29, 161, 242) 10%, transparent 10%);
+  --polka-bg-position: 0px 0px, 8px 8px;
+  --polka-bg-size: 16px 16px;
+  --polka-bg-color: rgb(255, 255, 255);
+}
+
+/* ...or add this class to an element */
+.polka {
+    background-color: transparent;
+    background-image: radial-gradient(circle, #bad3e3 20%, transparent 50%), radial-gradient(circle, #B7CADB 20%, transparent 50%);
+    background-size: 4px 4px;
+    background-position: 0 0, 100px 100px;
+    /* border-radius: 8px; */
+}
+.col-img{
+    position: relative;
+    z-index: 10;
+}
+.img-dotted-corner-right{
+    /* width: 200px;
+    height: 150px; */
+    padding: 2rem 5rem;
+    position: absolute;
+    top: -50px;
+    left: -20px;
+    z-index: 1;
+}
+.img-dotted-corner-top{
+    /* width: 200px;
+    height: 150px; */
+    padding: 6rem 2rem;
+    position: absolute;
+    top: 0px;
+    left: -40px;
+    z-index: 1;
+}
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  background-color: #eef2f695;
+  border: 0;
+  height: 2px;
+}
+.img-pillars{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.fa{
+    font-size: 2rem;
+    color: #333;
+    padding:8px 10px;
+    margin: 0;
+}
+.fa-facebook-f{
+    color: #3b5998;
+}
+.fa-linkedin{
+    color: #0077B5;
+}
+.fa-instagram{
+    color: #e1306c;
+}
+.fa-facebook-f:hover{
+    color: white;
+    background-color: #3b5998;
+    border-radius: 50%;
+}
+.fa-linkedin:hover{
+    color: white;
+    background-color: #0077B5;
+    border-radius: 50%;
+}
+.fa-instagram:hover{
+    color: white;
+    background-color: #e1306c;
+    border-radius: 50%;
+}
+</style>
+
+{% endblock %}
+ {% block content %}
+    <div class="about-us-container">
+        <div class="breadcumb-title-div">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">About Us</li>
+            </ol>
+          </nav>
+          <h2>
+              <strong>About Us</strong>
+          </h2>
+        </div>
+          <div class="about-us-info-container">
+            
+            <div class="row">
+                <div class="col-md-6 col-img">
+                    <img src="{% static 'img/clinic/undraw_about_us_page_re_2jfm.svg' %}" class="img-responsive" alt="contact us" />
+                    <!-- <div class="img-dotted-corner-right polka">
+                        <div class="img-dotted-corner-top polka"></div>
+                       
+                    </div> -->
+                     
+                  </div>
+                <div class="col-md-6">
+                    <h2 >
+                      About Disha Eye Care Clinic
+                    </h2>
+                    <p>
+                        We thrive to provide the best quality eye care services to our patients. We are a team of highly trained and experienced eye care professionals who are dedicated to providing the best eye care services to our patients. 
+                        We also have best technology in the field of eye care assuring that our patients get the best quality eye care services.
+                    </p>
+                </div>
+                
+              </div>
+              <hr>
+              <h4>Our Pillars</h4>
+              <div class="row" style="margin-top: 4rem">
+                
+                <div class="col-md-4 card">
+                    <div class="row">
+                        <img src="https://media.istockphoto.com/photos/happy-successful-businessman-or-company-employee-standing-in-office-picture-id1345853454?b=1&k=20&m=1345853454&s=170667a&w=0&h=dS4NdH7npKXPH3Cu-0aJVe0Ph674ZRZ8bI8H7lIGQC8=" class="img-responsive img-pillars" alt="founder" />
+                        <div class="fa-container">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <h3>
+
+                       Sam Josh Darudlo
+                    </h3>
+                    <h5>
+                       Founder
+                        </h5>
+                </div>
+               
+                <div class="col-md-4 card">
+                    <div class="row">
+                        <img src="https://images.unsplash.com/photo-1605884636476-ec4bd6c8d958?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Zm91bmRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" class="img-responsive img-pillars" alt="founder" />
+                        <div class="fa-container">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <h3>
+
+                       Nayra Al-Safadi
+                    </h3>
+                    <h5>
+                       Co-Founder
+                        </h5>
+                </div>
+                <div class="col-md-4 card">
+                    <div class="row">
+                        <img src="https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" class="img-responsive img-pillars" alt="founder" />
+                        <div class="fa-container">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <h3>
+
+                       John Albert Porto
+                    </h3>
+                    <h5>
+                       Chairman
+                        </h5>
+                </div>
+            </div>
+            <h4>Our Management Team</h4>
+            <div class="row" style="margin-top: 4rem">
+              
+              <div class="col-md-4 card">
+                  <div class="row">
+                      <img src="https://media.istockphoto.com/photos/happy-successful-businessman-or-company-employee-standing-in-office-picture-id1345853454?b=1&k=20&m=1345853454&s=170667a&w=0&h=dS4NdH7npKXPH3Cu-0aJVe0Ph674ZRZ8bI8H7lIGQC8=" class="img-responsive img-pillars" alt="founder" />
+                      <div class="fa-container">
+                          <i class="fa fa-linkedin" aria-hidden="true"></i>
+                          <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                          <i class="fa fa-instagram" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                  <h3>
+
+                     Sam Josh Darudlo
+                  </h3>
+                  <h5>
+                     Founder
+                      </h5>
+              </div>
+             
+              <div class="col-md-4 card">
+                  <div class="row">
+                      <img src="https://images.unsplash.com/photo-1605884636476-ec4bd6c8d958?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Zm91bmRlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" class="img-responsive img-pillars" alt="founder" />
+                      <div class="fa-container">
+                          <i class="fa fa-linkedin" aria-hidden="true"></i>
+                          <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                          <i class="fa fa-instagram" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                  <h3>
+
+                     Nayra Al-Safadi
+                  </h3>
+                  <h5>
+                     Co-Founder
+                      </h5>
+              </div>
+              <div class="col-md-4 card">
+                  <div class="row">
+                      <img src="https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80" class="img-responsive img-pillars" alt="founder" />
+                      <div class="fa-container">
+                          <i class="fa fa-linkedin" aria-hidden="true"></i>
+                          <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                          <i class="fa fa-instagram" aria-hidden="true"></i>
+                      </div>
+                  </div>
+                  <h3>
+
+                     John Albert Porto
+                  </h3>
+                  <h5>
+                     Chairman
+                      </h5>
+              </div>
+          </div>
+          </div>
+          
+    </div>
+
+ {% endblock %}

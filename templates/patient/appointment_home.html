@@ -145,6 +145,10 @@
             background-color: green;
 
         }
+        .img-responsive{
+            width:80%;
+            height: auto;
+        }
 </style>
 {% endblock %}
 {% block content %}
@@ -211,7 +215,7 @@
                         </div>
                    </div>  
                     <div class="col-md-6 col-sm-6 input-div">
-                        <img src="{% static 'img/clinic/appointment_book_bg.png' %}" class="img-responsive" alt="appointment booking" />
+                        <img src="{% static 'img/clinic/undraw_booking_svg.svg' %}" class="img-responsive" alt="appointment booking" />
                    </div>      
                    <div class="row button-div">
                     <a href="{% url 'patient:check-available-slots' %}" class="button">Let's Get Started</a>

@@ -1,7 +1,59 @@
 {% extends "base/client/base.html" %}
 {% load static %} 
 {% block head %}
+<style>
+  .button{
+          background-color: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 1.2rem 6rem;
+            font-size: 2rem;
+            cursor: pointer;
 
+            background: #1da1f2; /* default color */
+
+    /* "to left" / "to right" - affects initial color */
+    background: linear-gradient(to left, #1da1f2 50%, #36AE7C  50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+      }
+      .button:hover{
+        background-position: left;
+        color: aliceblue;
+      }
+      .button-outline{
+          /* background-color: #1da1f2; */
+            color: black;
+            border: none;
+            border-radius: 4px;
+            padding: 1.2rem 6rem;
+            font-size: 2rem;
+            cursor: pointer;
+
+            /* default color */
+            /* background: #1da1f2;  */
+            
+
+    /* "to left" / "to right" - affects initial color */
+    background: linear-gradient(to left, transparent 50%, #1da1f2  50%) right;
+    background-size: 200%;
+    outline: 1px solid gainsboro;
+    transition: .5s ease-out;
+      }
+      .button-outline:hover{
+        outline: 1px solid #1da1f2;
+        background-position: left;
+        color: aliceblue;
+      }
+      .mt-4{
+        margin-top: 1rem;
+      }
+      .mt-8{
+        margin-top: 2rem;
+      }
+      
+</style>
 {% endblock %}
  {% block content %}
 
@@ -58,7 +110,7 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="wow fadeInUp">
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-sm-6">
@@ -74,6 +126,12 @@
               Sed a dignissim lacus. Quisque fermentum est non orci commodo, a
               luctus urna mattis. Ut placerat, diam a tempus vehicula.
             </p>
+            <a href="{% url 'clinic:about-us' %}">
+              <button class="button-outline mt-8">
+                <i class="fa fa-angle-double-right"></i>
+                Read More
+              </button>
+            </a>
           </div>
           <!-- <figure class="profile wow fadeInUp mt-8" data-wow-delay="1s">
             <img src="{% static 'img/clinic/author-image.jpg' %}" class="img-responsive" alt="" />
@@ -136,21 +194,21 @@
           <h2>Our Specialities</h2>
         </div>
       </div>
-
+      {% for speciality in specialities %}
       <div class="col-md-4 col-sm-6">
         <!-- NEWS THUMB -->
         <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
           <a href="news-detail.html">
-            <img src="images/news-image1.jpg" class="img-responsive" alt="" />
+            <img src="{{ speciality.sample_image.url }}" class="img-responsive speciality-img" alt="" />
           </a>
           <div class="news-info">
-            <span>March 08, 2018</span>
-            <h3><a href="news-detail.html">About Amazing Technology</a></h3>
-            <p>
+            <!-- <span>March 08, 2018</span> -->
+            <h3><a href="">{{ speciality.name }}</a></h3>
+            <!-- <p>
               Maecenas risus neque, placerat volutpat tempor ut, vehicula et
               felis.
-            </p>
-            <div class="author">
+            </p> -->
+            <!-- <div class="author">
               <img
                 src="images/author-image.jpg"
                 class="img-responsive"
@@ -160,70 +218,12 @@
                 <h5>Jeremie Carlson</h5>
                 <p>CEO / Founder</p>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
 
-      <div class="col-md-4 col-sm-6">
-        <!-- NEWS THUMB -->
-        <div class="news-thumb wow fadeInUp" data-wow-delay="0.6s">
-          <a href="news-detail.html">
-            <img src="images/news-image2.jpg" class="img-responsive" alt="" />
-          </a>
-          <div class="news-info">
-            <span>February 20, 2018</span>
-            <h3>
-              <a href="news-detail.html">Introducing a new healing process</a>
-            </h3>
-            <p>
-              Fusce vel sem finibus, rhoncus massa non, aliquam velit. Nam et
-              est ligula.
-            </p>
-            <div class="author">
-              <img
-                src="images/author-image.jpg"
-                class="img-responsive"
-                alt=""
-              />
-              <div class="author-info">
-                <h5>Jason Stewart</h5>
-                <p>General Director</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 col-sm-6">
-        <!-- NEWS THUMB -->
-        <div class="news-thumb wow fadeInUp" data-wow-delay="0.8s">
-          <a href="news-detail.html">
-            <img src="images/news-image3.jpg" class="img-responsive" alt="" />
-          </a>
-          <div class="news-info">
-            <span>January 27, 2018</span>
-            <h3>
-              <a href="news-detail.html">Review Annual Medical Research</a>
-            </h3>
-            <p>
-              Vivamus non nulla semper diam cursus maximus. Pellentesque
-              dignissim.
-            </p>
-            <div class="author">
-              <img
-                src="images/author-image.jpg"
-                class="img-responsive"
-                alt=""
-              />
-              <div class="author-info">
-                <h5>Andrio Abero</h5>
-                <p>Online Advertising</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+     {% endfor %}
     </div>
   </div>
   
@@ -237,7 +237,7 @@
         <img src="{% static 'img/clinic/appointment_book_bg.png' %}" class="img-responsive" alt="appointment booking" />
       </div>
 
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-6 col-sm-6" style="padding: 8rem 0 0 0;">
           <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
                <h2>Want to consult ?</h2>
           </div>
@@ -253,7 +253,7 @@
                </h5>
                <a
                     href="{% url 'patient:appointment-home' %}"
-                    class="btn btn-primary wow fadeInUp mt-16"
+                    class="section-btn button wow fadeInUp mt-16"
                >
                  Book your appointment here
               </a>
