@@ -6,8 +6,9 @@
  <title>Patient Details</title>
 <style>
     .doctor-profile-container{
-        max-width: min(90%,75%);
-        margin: 2rem auto;
+        /* max-width: min(90%,75%);
+        margin: 2rem auto; */
+        padding: 2rem 4rem;
       }
       .doctor_profile_image,.doctor_certificate_image{
         object-fit: cover;
@@ -37,6 +38,14 @@
       }
       .form-section label{
           font-weight: bold;
+      }
+      .col-img{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      .row{
+          margin-left: -4px
       }
 </style>
  {% endblock %}
@@ -328,7 +337,7 @@
                    
                 <div class="form-section rounded  mb-4 p-4">
                     <div class="row">
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 col-img">
                             <h2 class="h5 my-4">Profile Image</h2>
                             <div class="card border-light text-center p-0">
                                 
@@ -397,7 +406,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3 col-img">
                             <h2 class="h5 my-4">Certificate Image</h2>
                             <div class="card border-light text-center p-0">
                                 
@@ -460,6 +469,12 @@
   
   
   {% block script %}
+  <script>
+    $(document).ready(function(){
+      $('.nav_link').removeClass('active');
+      $('#profile-li').addClass('active');
+    });
+    </script>
   <script>
     const profile_image_input = document.getElementById('profile_image');
           const profile_image_preview = document.getElementById('doctor_profile_image')

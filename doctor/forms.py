@@ -87,3 +87,6 @@ class EditDoctorForm(forms.ModelForm):
         model = Doctor
         fields = ['first_name', 'middle_name',
                   'last_name', 'phone_no', 'address', 'qualification', 'experience', 'specialization', 'fees', 'timings', 'profile_image', 'certificate_image']
+                
+class GetAppointmentForDoctorForm(forms.Form):
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),initial=datetime.date.today)

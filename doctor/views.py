@@ -4,13 +4,14 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django. db. models import Q
 
 from appointment.models import Appointment, DailySlotBooking
 from patient.models import Patient
 
 from .models import  DoctorTimeSlot, TimeSlot
 
-from .forms import AddTimeSlotForm, DoctorUserForm, DoctorForm, EditDoctorForm, EditTimeSlotForm, GetTimeSlotForm, TimeSlotForm
+from .forms import AddTimeSlotForm, DoctorUserForm, DoctorForm, EditDoctorForm, EditTimeSlotForm, GetAppointmentForDoctorForm, GetTimeSlotForm, TimeSlotForm
 
 # Create your views here.
 USER_GROUP = {
@@ -19,7 +20,43 @@ USER_GROUP = {
 
 
 def home(request):
-    return render(request, 'doctor/index.html')
+    template_page = 'doctor/index.html'
+
+    # get all completed appointments for today
+
+    today_appointments = Appointment.objects.filter(
+        daily_slot_booking__doctor_time_slot__doctor=request.user,
+        daily_slot_booking__date=datetime.date.today(),        
+    )
+    today_appointments_completed = today_appointments.filter(status='COMPLETED').count()
+    today_appointments_pending = today_appointments.filter(status='PENDING').count()
+
+    # all appointments 
+    all_appointments = Appointment.objects.filter(
+        daily_slot_booking__doctor_time_slot__doctor=request.user)
+    
+    all_appointments_completed = all_appointments.filter(status='COMPLETED').count()
+    all_appointments_pending = all_appointments.filter(status='PENDING').count()
+
+    my_appointments = Appointment.objects.filter(
+        daily_slot_booking__doctor_time_slot__doctor=request.user,
+    )
+    my_patients = my_appointments.values_list('patient', flat=True).distinct()
+    my_patients = Patient.objects.filter(id__in=my_patients)
+
+
+    total_patients = my_patients.count()
+    
+
+    template_context = {
+        'today_appointments_completed': today_appointments_completed,
+        'today_appointments_pending':
+        today_appointments_pending,
+        'all_appointments_completed': all_appointments_completed,
+        'all_appointments_pending': all_appointments_pending,
+        'total_patients': total_patients,
+    }        
+    return render(request, template_page, context=template_context)
 
 
 def add_doctor(request):
@@ -135,11 +172,21 @@ def time_slots(request):
     # doctor_time_slots=DoctorTimeSlot.objects.all()
     doctor_time_slots = DoctorTimeSlot.objects.filter(
         doctor=request.user, time_slot__day=selected_day, time_slot__deleted=False)
+    
+    selected_search_filters = request.GET.get('search-time-slots', None)
+
+    if selected_search_filters:
+        doctor_time_slots = doctor_time_slots.filter(
+            Q(time_slot__start_time__icontains=selected_search_filters) | Q(time_slot__end_time__icontains=selected_search_filters) | Q(time_slot__half_time__icontains=selected_search_filters) 
+        )
+
 
     PAGE_OFFSET = 5
     paginator = Paginator(doctor_time_slots, PAGE_OFFSET)
     try:
         slots = paginator.page(page)
+        slots.adjusted_elided_pages = paginator.get_elided_page_range(
+            page)
     except PageNotAnInteger:
         slots = paginator.page(1)
     except EmptyPage:
@@ -148,6 +195,7 @@ def time_slots(request):
     template_context = {
         'get_time_slots_form': get_time_slots_form,
         'doctor_time_slots': slots,
+        'page_obj': slots,
         'selected_day': selected_day
     }
 
@@ -259,16 +307,37 @@ def add_time_slot(request):
 
 def my_appointments(request):
     template_page = 'doctor/my_appointments.html'
+
+    get_appointments_form = GetAppointmentForDoctorForm()
+
     my_appointments = Appointment.objects.filter(
         daily_slot_booking__doctor_time_slot__doctor=request.user,
     )
 
     page = request.GET.get('page', 1)
 
+    selected_search_filters = request.GET.get('search-appointments', None)
+
+    if selected_search_filters:
+        my_appointments = my_appointments.filter(
+            Q(patient__patientprofile__first_name__icontains=selected_search_filters) | Q(patient__patientprofile__last_name__icontains=selected_search_filters) | Q(daily_slot_booking__doctor_time_slot__time_slot__start_time__icontains=selected_search_filters) | Q(daily_slot_booking__doctor_time_slot__time_slot__end_time__icontains=selected_search_filters) | Q(
+                status__icontains=selected_search_filters)
+            
+        )
+
+
+    selected_date = request.GET.get('date', None)
+
+    if selected_date:
+        my_appointments = my_appointments.filter(
+            daily_slot_booking__date=selected_date)
+
     PAGE_OFFSET = 5
     paginator = Paginator(my_appointments, PAGE_OFFSET)
     try:
         appointments = paginator.page(page)
+        appointments.adjusted_elided_pages = paginator.get_elided_page_range(
+            page)
     except PageNotAnInteger:
         appointments = paginator.page(1)
     except EmptyPage:
@@ -276,7 +345,9 @@ def my_appointments(request):
 
 
     template_context = {
-        'my_appointments': appointments
+        'get_appointments_form': get_appointments_form,
+        'my_appointments': appointments,
+        'page_obj': appointments,
     }
     return render(request, template_page, context=template_context)
 
@@ -301,17 +372,38 @@ def my_patients(request):
 
     page = request.GET.get('page', 1)
 
+    selected_search_filters = request.GET.get('search-my-patients', None)
+
+    if selected_search_filters:
+        my_patients = my_patients.filter(
+            Q(patientprofile__first_name__icontains=selected_search_filters) | Q(patientprofile__last_name__icontains=selected_search_filters) | Q
+            (
+                phone_no__icontains=selected_search_filters)
+            | Q(
+                patientprofile__age__icontains=selected_search_filters)
+            | Q(
+                patientprofile__gender__icontains=selected_search_filters
+            ) | Q(
+                patientprofile__address__icontains=selected_search_filters
+            ) | Q(
+                patientprofile__email__icontains=selected_search_filters
+            )
+        )
+
     PAGE_OFFSET = 5
     paginator = Paginator(my_patients, PAGE_OFFSET)
     try:
         patients = paginator.page(page)
+        patients.adjusted_elided_pages = paginator.get_elided_page_range(
+            page)
     except PageNotAnInteger:
         patients = paginator.page(1)
     except EmptyPage:
         patients = paginator.page(paginator.num_pages)
 
     template_context = {
-        'patients': patients
+        'patients': patients,
+        'page_obj': patients,
     }
     return render(request, template_page, context=template_context)
 

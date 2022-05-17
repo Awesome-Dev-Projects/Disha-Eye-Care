@@ -65,8 +65,9 @@
         margin-bottom: 1rem;
       }
       .time-slots-container{
+        padding: 2rem 4rem;
         /* margin-top: 1rem; */
-        max-width: min(90%,75%);
+        /* max-width: min(90%,75%); */
         margin: 0 auto;
       }
       .table{
@@ -101,6 +102,11 @@
       .list-container{
         display: flex;
         justify-content: space-between;
+      }
+      .list-container form{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
       }
    
  </style>
@@ -163,16 +169,22 @@
   {% endfor %}
   </div>
     </div>
-  <button type="submit" class="btn btn-primary">Get Time Slots</button>
+  <button type="submit" class="btn btn-primary px-4">Get Time Slots</button>
 </form>
 <hr>
 <div class="list-container">
-  <h4 class=""> <strong>{{ selected_day }}</strong> </h4>
+  <div>
+    <h4 class="">Selected day : <strong>{{ selected_day }}</strong> </h4>
+    <a href="{% url 'doctor:add-time-slot' %}" class="btn btn-primary px-4 mt-4">
+   
+      Add Time Slot
+      </a>
+  </div>
+  <form action="">
+    <input type="text" name="search-time-slots" class="form-control" placeholder="Search by slot time or slot session or by doctor">
+    <input type="submit" value="Search" class="btn btn-primary px-4 mt-2">
+  </form>
   
-  <a href="{% url 'doctor:add-time-slot' %}" class="btn btn-primary">
-    <i class='bx bx-plus'></i>
-    Add Time Slot
-    </a>
 </div>
 <table class="table table-striped table-hover">
   <thead>
@@ -193,12 +205,12 @@
       <td> {{ time_slot.time_slot.end_time|time:"h:i A" }} </td>
       <td> {{ time_slot.time_slot.half_time }} </td>
       <td>
-        <a href="{% url 'doctor:edit-time-slot' time_slot.time_slot.pk %}" class="btn btn-primary">
-          <i class='bx bx-edit-alt'></i>
-        </a>
         
       </td>
       <td>
+        <a href="{% url 'doctor:edit-time-slot' time_slot.time_slot.pk %}" class="btn btn-outline-secondary">
+          <i class='bx bx-edit-alt'></i>
+        </a>
         <a href="{% url 'doctor:delete-time-slot' time_slot.time_slot.pk %}" class="btn btn-outline-danger">
           <i class='bx bx-trash'></i>
         </a>
@@ -207,22 +219,37 @@
     {% endfor %}
   </tbody>
 </table>
-{% if doctor_time_slots.has_other_pages %} 
+{% if page_obj.has_other_pages %} 
     <ul class="pagination">
-      {% if doctor_time_slots.has_previous %}
-        <li><a href="?page={{ doctor_time_slots.previous_page_number }}">&laquo;</a></li>
+      {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
       {% else %}
         <li class="disabled"><span>&laquo;</span></li>
       {% endif %}
-      {% for i in doctor_time_slots.paginator.page_range %}
+      <!-- {% for i in doctor_time_slots.paginator.page_range %}
         {% if doctor_time_slots.number == i %}
           <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
         {% else %}
           <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
-      {% endfor %}
-      {% if doctor_time_slots.has_next %}
-        <li><a href="?page={{ doctor_time_slots.next_page_number }}">&raquo;</a></li>
+      {% endfor %} -->
+      {% for page_number in page_obj.adjusted_elided_pages %}
+      
+        {% if page_number == page_obj.paginator.ELLIPSIS %}
+            {{page_number}}
+        {% else %}
+            <li class="{% if page_number == page_obj.number %}active {% endif %}">
+                <a
+                href="?page={{ page_number }}"
+                class="{% if page_number == page_obj.number %}text-white{% endif %}"
+            >
+                {{page_number}}
+            </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+      {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
       {% else %}
         <li class="disabled"><span>&raquo;</span></li>
       {% endif %}
@@ -266,5 +293,10 @@
   {% endblock %}
   
   {% block script %}
-  
+  <script>
+    $(document).ready(function(){
+      $('.nav_link').removeClass('active');
+      $('#time-slots-li').addClass('active');
+    });
+    </script>
   {% endblock %}
