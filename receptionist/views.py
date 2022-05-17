@@ -668,18 +668,20 @@ def generate_daily_slot_schedule(request):
                 day_date = datetime.datetime.strptime(day, '%Y-%m-%d')
                 for doctor in doctors_list:
                     doctor_user = doctor.user
-                    doctor_time_slots = DoctorTimeSlot.objects.filter(doctor=doctor_user,
-                                                                      time_slot__day=get_day_from_date(
-                                                                          day_date),
-                                                                      deleted=False).order_by('time_slot__start_time')
+                    doctor_time_slots = DoctorTimeSlot.objects.filter(doctor=doctor_user,time_slot__day=get_day_from_date(day_date),deleted=False).order_by('time_slot__start_time')
                     for doctor_time_slot in doctor_time_slots:
-                        daily_slot_booking, created = DailySlotBooking.objects.get_or_create(
-                            date=day_date,
-                            doctor_time_slot=doctor_time_slot,
-                            status='AVAILABLE'
-                        )
-                        generated_daily_schedule = generated_daily_schedule | DailySlotBooking.objects.filter(
-                            id=daily_slot_booking.id)
+                        is_daily_slot_booking_exists = DailySlotBooking.objects.filter(
+                            doctor_time_slot=doctor_time_slot, date=day_date).exists()
+                        print(is_daily_slot_booking_exists)
+
+                        if not is_daily_slot_booking_exists:
+                            daily_slot_booking, created = DailySlotBooking.objects.get_or_create(
+                                date=day_date,
+                                doctor_time_slot=doctor_time_slot,
+                                status='AVAILABLE'
+                            )
+                            generated_daily_schedule = generated_daily_schedule | DailySlotBooking.objects.filter(
+                                id=daily_slot_booking.id)
 
             messages.success(request, 'Daily schedule generated successfully')
 

@@ -153,14 +153,15 @@
       .center-div{
         margin: 0 auto !important;
         /* width: 500px; */
-        max-width: 700px;
+        /* max-width: 700px; */
         margin-top: 1rem !important;
+        padding: 2rem 11rem;
       }
 
       .check-available-slot-container{
-        margin: 1rem auto;
+        /* margin: 1rem auto; */
         border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
       }
       .radio-doctor label p{
         /* font-weight: bold; */
@@ -216,16 +217,47 @@
         margin-top: 1rem;
         margin-bottom: 2rem;
       }
+      .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
 </style>
 {% endblock %}
 {% block content %}
-    <div class="container check-available-slot-container">
+    <div class="check-available-slot-container">
+      <div class="breadcumb-title-div">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'patient:appointment-home' %}">Appointments</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Check available slots</li>
+            </ol>
+          </nav>
+          <h2>
+              <strong>Check available slots</strong>
+          </h2>
+    </div>
         <div class="row center-div">
             <form id="" role="form" method="post" action="#">
                 {% csrf_token %} 
                 <!-- SECTION TITLE -->
                 <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
-                     <h2>Check Available Slot</h2>
+                     <h2>Select Date and Doctor</h2>
                 </div>
                 <!-- <div class="col-md-12 col-sm-12 input-div">
                   <p>Had some prevoius consultations with us ? <strong>
@@ -282,11 +314,11 @@
             <div class="row center-div" id="check_available_slot_tab">
                 <form class="" action="{% url 'patient:book-slot' %}" method="post">
                     {% csrf_token %}
-                    <h3>Slot Availability</h3>
+                    <h3>Select a slot for appointment</h3>
                     <div class="col">
-                        <label for="">Select a slot for appointment</label>
                         {% for half_time in half_times %}
                         <div class="mt-2 half-time-badge">
+                          
                           <p>{{ half_time }}</p>
                         </div>
                         <div class="flex">

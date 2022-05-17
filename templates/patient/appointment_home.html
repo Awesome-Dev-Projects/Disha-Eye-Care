@@ -24,14 +24,14 @@
         margin: 0 auto !important;
         /* width: 500px; */
         /* max-width: 700px; */
-        padding: 1rem 4rem;
+        padding: 4rem 11rem;
       }
 
       .appointment-home-container{
-          padding: 1em 0;
-        margin: 1rem auto;
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+          /* padding: 1em 0;
+        margin: 1rem auto; */
+        /* border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
       }
       .appointment-home-container table{
           width: 100%;
@@ -50,44 +50,21 @@
         padding: 1rem;
         flex-basis: 50%;
       }
-      .summary-title{
-        font-size: 1.5rem;
-        font-weight: bold;
-        /* flex-basis: 50%; */
-        background-color: rgba(220, 220, 220, 0.432);
-        color: black;
-        padding: 1rem;
-        border-radius: 4px;
-      }
-      .summary-title-td,.summary-text-td{
-        flex-basis: 45%;
-      }
-      .summary-title-td{
-        text-align: center;
-      }
       
-      .summary-arrow-td{
-        flex-basis: 10% !important;
-        padding: 2rem !important;
-        color:grey;
-        font-size: 2rem !important;
-      }
-      .summary-text{
-          font-size: large;
-        /* flex-basis: 50%; */
-        padding: 1rem;
-      }
       .card{
-          margin-top: 2rem;
+          /* margin-top: 2rem; */
           padding: 1rem;
           border-radius: 8px;
           transition: all 0.3s ease;
+          min-height: 300px;
+          
       }
       .card:hover{
             /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
             transform: translate(0, -5px);
-            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
       }
+      
       .step-icon{
         width: 5vw;
   height: 5vw;
@@ -111,7 +88,7 @@
       }
       .button-div{
           margin-top:4rem;
-          margin-left: 4rem;
+          /* margin-left: 4rem; */
           margin-bottom: 2rem;
       }
       .button{
@@ -127,52 +104,167 @@
           background-color: #325c76;
             color: white;
       }
-      .previous-appointment-link-div{
+      .previous-appointment-link-div {
           /* margin-top:4rem; */
-          margin-left: 1rem;
+          /* margin-left: 1rem; */
           /* margin-bottom: 2rem; */
       }
       .previous-appointment-link-div a{
-          color: green;
+          color: #1da1f2;
           /* text-decoration: underline; */
-          padding: 0.5rem 1rem;
+          padding: 1rem 2rem;
           border-radius: 4px;
-          border: 1px solid green;
+          border: 1px solid #1da1f2;
+          
 
       }
         .previous-appointment-link-div a:hover{
             color: white;
-            background-color: green;
+            background-color: #1da1f2;
 
         }
         .img-responsive{
             width:80%;
             height: auto;
         }
+        .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
+    .appointment-image{
+        display: flex;
+    justify-content: flex-end;
+    }
+    hr{
+        height: 1px;
+    }
+    .card-header-flex{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .card-header-flex h2{
+        padding: 0 2rem;
+    }
+    .card h4{
+        margin-top: 2rem !important;
+    }
+    .mt-8{
+        margin-top: 4rem;
+    }
 </style>
 {% endblock %}
 {% block content %}
-<div class="container appointment-home-container">
+<div class="appointment-home-container">
+    <div class="breadcumb-title-div">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+            </ol>
+          </nav>
+          <h2>
+              <strong>Appointments</strong>
+          </h2>
+    </div>
     <div class="row center-div">
-        <form id="" role="form" method="post">
-            {% csrf_token %} 
-            <!-- SECTION TITLE -->
-            <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
-                 <h2>Welcome</h2>
-                 <p>You are at right place. We have very simple steps to book your appointment with our doctor</p>
+        <div class="row">
+            <div class="col-md-6 col-img">
+                <img src="{% static 'img/clinic/undraw_booking_svg.svg' %}" class="img-responsive enter-otp-img" alt="contact us" />
+               
                  
+              </div>
+            <div class="col-md-6">
+               
+                
+                    <!-- SECTION TITLE -->
+                    <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
+                        <h2>Welcome</h2>
+                        <p>You are at right place. We have very simple steps to book your appointment with our doctor</p>
+                        <p>
+                            We will help you to book your appointment with our doctor.
+                        </p>
+                        
+                   </div>
             </div>
-
+          </div>
+       
+           <hr>
             <div class="wow fadeInUp" data-wow-delay="0.8s">
-        
-                 <div class="row flex">
-                    <div class="col-md-6 col-sm-6 input-div">
-                        <div class="row card">
-                            <div class="col-md-2">
-                                <div class="step-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                <div class="flex steps-row">
+                    <div class="col-md-4 card">
+                        <div class="card-header-flex">
+                            <div class="step-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                            <h2>01</h2>
+                            
+                        </div>
+                        <h4>
+                            <strong>Check Available Slots</strong>
+                        </h4>
+                        <p>
+                            Select your preferred date and the doctor whom you want to book an appointment. Here you can see the available slots for the selected date and for the selected doctor.
+                        </p>
+                       
+                    </div>
+                    <div class="col-md-4 card">
+                        <div class="card-header-flex">
+                            <div class="step-icon"><i class="fa fa-key" aria-hidden="true"></i>
+                            </div>
+                            <h2>02</h2>
+                            
+                        </div>
+                        <h4>
+                            <strong>Verify yourself</strong>
+                        </h4>
+                        <p>
+                            Please enter your phone number in order to help us verify your identity. You will receive a verification code to your phone number via SMS. Enter the code recieved when asked to proceed. 
+                        </p>
+                       
+                    </div>
+                    <div class="col-md-4 card">
+                        <div class="card-header-flex">
+                            <div class="step-icon">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <h2>03</h2>
+                            
+                        </div>
+                        <h4>
+                            <strong>Profile Details</strong>
+                        </h4>
+                        <p>
+                            Please enter your demographic details.Also provide required medical information . You can edit your profile later if you want. So feel free to fill in the details.
+                        </p>
+                       
+                    </div>
+                </div>
+              <!--   <div class="row flex">
+                  
+                        <div class="col-md-4 card">
+                           
+                            <div class="col-md-10">
+                                <div class="card-header-flex">
+                                    <div class="step-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                                    <h2>01</h2>
+                                </div>
                             </div>
                             <div class="col-md-10">
-                                <h2>01</h2>
                                 <h4>
                                     <strong>Check Available Slots</strong>
                                 </h4>
@@ -181,14 +273,17 @@
                                 </p>
                             </div>
                         </div>
-                        <hr>
-                        <div class="row card">
-                            <div class="col-md-2">
-                                <div class="step-icon"><i class="fa fa-key" aria-hidden="true"></i>
+                        
+                        <div class="col-md-4 card">
+                            <div class="col-md-10">
+                                <div class="card-header-flex">
+                                    <div class="step-icon"><i class="fa fa-key" aria-hidden="true"></i>
+                                    </div>
+                                    <h2>02</h2>
                                 </div>
                             </div>
                             <div class="col-md-10">
-                                <h2>02</h2>
+                                
                                 <h4>
                                     <strong>Verify yourself</strong>
                                 </h4>
@@ -197,14 +292,18 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="row card">
-                            <div class="col-md-2">
-                                <div class="step-icon">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                        
+                        <div class="col-md-4 card">
+                            <div class="col-md-10">
+                                <div class="card-header-flex">
+                                    <div class="step-icon">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </div>
+                                    <h2>03</h2>
                                 </div>
                             </div>
                             <div class="col-md-10">
-                                <h2>03</h2>
+                                
                                 <h4>
                                     <strong>Profile Details</strong>
                                 </h4>
@@ -213,26 +312,31 @@
                                 </p>
                             </div>
                         </div>
-                   </div>  
-                    <div class="col-md-6 col-sm-6 input-div">
+                   
+                     <div class="col-md-6 col-sm-6 input-div appointment-image">
                         <img src="{% static 'img/clinic/undraw_booking_svg.svg' %}" class="img-responsive" alt="appointment booking" />
-                   </div>      
-                   <div class="row button-div">
+                   </div>       
+                   
+                 </div>    -->
+                 <div class=" button-div">
                     <a href="{% url 'patient:check-available-slots' %}" class="button">Let's Get Started</a>
-                   </div>
-                 </div>           
-                <div class="row flex previous-appointment-link-div">
+                   </div>   
+                <div class="row flex previous-appointment-link-div mt-8">
+                    
                     <div class="col-md-12 col-sm-12">
                       <p> If you have made any prevoius appointment with us, feel free to checkout your previous appointments here. </p>
-                         <strong>
-                    <a href="{% url 'patient:appointment-history' %}">
-                        Prevoius Appointments
-                    </a>      
-                    </strong></p>
+                      <p>
+                        <strong>
+                            <a href="{% url 'patient:appointment-history' %}">
+                                Prevoius Appointments
+                            </a>      
+                            </strong>
+                      </p>
+                         
                     </div>
                 </div>
             </div>
-        </form>
+        
     </div>
 </div>
 {% endblock %}

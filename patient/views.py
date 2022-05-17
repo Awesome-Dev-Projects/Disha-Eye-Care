@@ -237,15 +237,28 @@ def check_available_slots_new(request):
         if choose_date_form.is_valid():
             selected_date = choose_date_form.cleaned_data['date']
             doctor = choose_date_form.cleaned_data['doctor']
-            print(selected_date, doctor)
+            print(type(selected_date), doctor)
 
-            slots_available = DailySlotBooking.objects.filter(
+            if selected_date == datetime.today().date():
+                print("today",datetime.today().now().time().hour)
+                slots_available = DailySlotBooking.objects.filter(
+                date=selected_date,
+                doctor_time_slot__doctor=doctor.user,
+                doctor_time_slot__time_slot__day=get_day_from_date(selected_date), deleted=False)
+                
+                # Get slots whose start time is greater than current time
+                slots_available = slots_available.filter(
+                    doctor_time_slot__time_slot__start_time__gte=str(datetime.now().time()))
+            
+            else:
+                slots_available = DailySlotBooking.objects.filter(
                 date=selected_date,
                 doctor_time_slot__doctor=doctor.user,
                 doctor_time_slot__time_slot__day=get_day_from_date(selected_date), deleted=False)
             print(slots_available)
             half_times = slots_available.values_list(
                 'doctor_time_slot__time_slot__half_time',flat=True).distinct()
+            
 
             # daily_slot_bookings = DailySlotBooking.objects.filter(
             #     date=selected_date,deleted=False)

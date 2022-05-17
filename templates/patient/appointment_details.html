@@ -23,17 +23,18 @@
       .center-div{
         margin: 0 auto !important;
         /* width: 500px; */
-        max-width: 700px;
+        /* max-width: 700px; */
+        padding: 2rem 11rem;
       }
 
       .appointment-details-container{
-          padding: 4em 0;
-        margin: 1rem auto;
-        border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+          /* padding: 4em 0; */
+        /* margin: 1rem auto; */
+        /* border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
       }
       .appointment-details-container table{
-          width: 100%;
+          width: min(60%, 100%);
           /* background-color: beige; */
     border-radius: 8px;
       }
@@ -46,18 +47,18 @@
     border-bottom: 1px solid gainsboro;
 }
       .appointment-details-container td{
-        padding: 1rem;
+        padding: 1rem 0;
         flex-basis: 50%;
       }
       .summary-title{
         font-size: 1.5rem;
         font-weight: bold;
-        /* flex-basis: 50%; */
-        background-color: beige;
+        flex-basis: 50%;
+        background-color: #93caec;
         color: black;
         /* padding: 1rem; */
         /* border-radius: 4px; */
-        width: fit-content;
+        /* width: fit-content; */
     border-radius: 0 48px 48px 0;
     padding: 1rem 2rem;
       }
@@ -92,16 +93,49 @@
           background-color: #325c76;
             color: white;
       }
+
+      .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
 </style>
 {% endblock %}
 {% block content %}
-<div class="container appointment-details-container">
+<div class="appointment-details-container">
+    <div class="breadcumb-title-div">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'patient:appointment-home' %}">Appointments</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'patient:appointment-history' %}">Appointments History</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Appointments Details</li>
+            </ol>
+          </nav>
+          <h2>
+              <strong>Appointments Details</strong>
+          </h2>
+    </div>
     <div class="row center-div">
         <form id="" role="form" method="post">
             {% csrf_token %} 
             <!-- SECTION TITLE -->
             <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
-                 <h2>Appointment Details </h2>
+                 <!-- <h2>Appointment Details </h2> -->
                  
             </div>
 
@@ -109,7 +143,7 @@
         
                  <div class="row flex">
                     <div class="col-md-12 col-sm-12 input-div">
-                        <p>Here are your appointment details </p>
+                        <h4>Here are your appointment details </h4>
                  
                  <table>
                     <tr>

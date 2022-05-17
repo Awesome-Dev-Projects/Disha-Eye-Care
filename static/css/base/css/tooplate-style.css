@@ -207,6 +207,10 @@ http://www.tooplate.com/view/2098-health
     padding: 0;
   }
 
+  .form-control{
+    color: black !important;
+  }
+
 
   /*---------------------------------------
        PRE LOADER              
@@ -1051,6 +1055,17 @@ background-image: linear-gradient(315deg, #000000 0%, #414141 74%); */
     color: #ffffff;
   }
 
+  .footer-thumb .important-links{
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-thumb .important-links a{
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+  footer h5{
+    font-size: large;
+  }
 
   /*---------------------------------------
      RESPONSIVE STYLES              

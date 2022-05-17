@@ -22,24 +22,27 @@
       
       .center-div{
         margin: 0 auto !important;
-        width: 500px;
-        max-width: 700px;
+        /* width: 500px;
+        max-width: 700px; */
+        padding: 4rem 11rem;
       }
 
       .get-otp-container{
-          padding: 4em 0;
-        margin: 1rem auto;
+          /* padding: 4em 0; */
+        /* margin: 1rem auto;
         border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
       }
       .button{
           background-color: #1da1f2;
             color: white;
             border: none;
             border-radius: 4px;
-            padding: 1rem 6rem;
+            /* padding: 1rem 6rem; */
             font-size: 1.5rem;
             cursor: pointer;
+            width: 100%;
+            padding: 1rem 0;
       }
       .button:hover{
           background-color: #325c76;
@@ -51,14 +54,96 @@
       .mt-8{
         margin-top: 2rem;
       }
+
+      .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
+    .enter-otp-img{
+        width: 70%;
+        height: auto;
+    }
+    .flex-col{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+    }
 </style>
 {% endblock %}
 {% block content %}
-<div class="container get-otp-container">
+<div class="get-otp-container">
+  <div class="breadcumb-title-div">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'patient:appointment-home' %}">Appointments</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Get OTP</li>
+        </ol>
+      </nav>
+      <h2>
+          <strong>Get OTP</strong>
+      </h2>
+</div>
     <div class="row center-div">
-        <form id="" role="form" method="post">
+      <div class="row">
+        <div class="col-md-6 col-img">
+            <img src="{% static 'img/clinic/undraw_typewriter_re_u9i2.svg' %}" class="img-responsive enter-otp-img" alt="contact us" />
+            <!-- <div class="img-dotted-corner-right polka">
+                <div class="img-dotted-corner-top polka"></div>
+               
+            </div> -->
+             
+          </div>
+        <div class="col-md-6">
+            <!-- <h2 >
+              Specialists in multiple fields of Eye Care
+            </h2>
+            <p>
+                Our doctors are well-qualified and experienced in their respective fields. We have a team of highly trained doctors who are dedicated to providing the best possible care to our patients.
+            </p> -->
+            <form id="" role="form" method="post" class="flex-col">
+                {% csrf_token %} 
+                <!-- SECTION TITLE -->
+                <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
+                     <h2>Enter your Phone number</h2>
+                </div>
+    
+                <div class="wow fadeInUp" data-wow-delay="0.8s">
+            
+                     <div class="row flex">
+                        <div class="col-md-6 col-sm-6 input-div">
+                            {{ get_otp_form }}
+                       </div>      
+                     </div>           
+                    <div class="row flex">
+                        <div class="col-md-6 col-sm-6 input-div">
+                            <input class="button" type="submit" value="Get OTP" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+      </div>
+        <!-- <form id="" role="form" method="post">
             {% csrf_token %} 
-            <!-- SECTION TITLE -->
+          
             <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
                  <h2>Enter your Phone number</h2>
             </div>
@@ -76,7 +161,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </form> -->
     </div>
 </div>
 {% endblock %}

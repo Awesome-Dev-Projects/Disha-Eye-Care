@@ -4,24 +4,26 @@
 {% block head %}
 <style>
     .card-div{
-        background-color: beige;
+        background-color: aliceblue;
     /* border: 1px solid gainsboro; */
     padding: 1em 2em;
     border-radius: 8px;
     margin-top: 1rem;
     margin-left: 1rem;
+    /* margin-right: 4rem; */
     font-size: large;
     display: flex;
     justify-content: space-between;
     align-items: center;
     }
     .card-number{
-        padding: 1em;
-    background-color: beige;
+        padding:1em 2em ;
+    background-color: #93caec;
     border-radius: 10% 70% 70% 10%;
-    width: 50px;
+    width: 6vw;
     text-align: center;
     font-weight: bold;
+    font-size: 2rem;
     margin-right: 2rem;
     margin-left: 1rem;
     }
@@ -53,17 +55,18 @@
       .center-div{
         margin: 0 auto !important;
         /* width: 500px; */
-        max-width: 700px;
+        /* max-width: 700px; */
+        padding: 2rem 11rem
       }
 
-      .get-otp-container{
-          padding: 4em 0;
-        margin: 1rem auto;
+      .appointment-history-container{
+          /* padding: 4em 0; */
+        /* margin: 1rem auto;
         border-radius: 8px;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
       }
       .button{
-          background-color: rgb(156, 156, 58);
+          background-color: #1da1f2;
             color: white;
             border: none;
             border-radius: 4px;
@@ -75,10 +78,43 @@
           background-color: #325c76;
             color: white;
       }
+
+      .breadcumb-title-div{
+        background-color: #eef2f695 !important;
+        padding: 2rem 11rem;
+    }
+    .breadcumb-title-div h2{
+        /* font-size: 4rem; */
+        color: rgb(17, 19, 35);
+    }
+    .breadcrumb{
+        background-color: transparent;
+        font-size: 1.5rem;
+        padding:8px 0 !important;
+    }
+    .breadcrumb a{
+        /* color: #fff; */
+    }
+    .breadcrumb > .active{
+        color: gray;
+    }
 </style>
 {% endblock %}
 {% block content %}
-<div class="container get-otp-container">
+<div class="appointment-history-container">
+    <div class="breadcumb-title-div">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'patient:appointment-home' %}">Appointments</a></li>
+             
+              <li class="breadcrumb-item active" aria-current="page">Appointments History</li>
+            </ol>
+          </nav>
+          <h2>
+              <strong>Appointments History</strong>
+          </h2>
+    </div>
     <div class="row center-div">
         <form id="" role="form" method="post">
             {% csrf_token %} 
@@ -99,17 +135,21 @@
                     <div class="col-md-10 col-sm-10 card-div">
                         <div class="div">
                             <h4>{{ appointment.daily_slot_booking.date }}</h4>
-                            <p> You had an appointment - 
-                                <p>
-                                    with <strong> Dr. {{ appointment.daily_slot_booking.doctor_time_slot.doctor.doctor.first_name }} {{ appointment.daily_slot_booking.doctor_time_slot.doctor.doctor.last_name }} </strong>
-                                </p>
+                            <div>
+                                <span> You had an appointment - 
+                                    <span>
+                                        at <strong>
+                                            {{ appointment.daily_slot_booking.doctor_time_slot.time_slot.get_time_slot_with_day }} 
+                                        </strong>
+                                        
+                                    </span>
+                                    </span>
+                            </div>
                                 <!-- <p>on 
                                     <strong>{{ appointment.daily_slot_booking.date }}</strong>
                                 </p> -->
                                 <p>
-                                    at <strong>
-                                        {{ appointment.daily_slot_booking.doctor_time_slot.time_slot.get_time_slot_with_day }} 
-                                    </strong>
+                                    with <strong> Dr. {{ appointment.daily_slot_booking.doctor_time_slot.doctor.doctor.first_name }} {{ appointment.daily_slot_booking.doctor_time_slot.doctor.doctor.last_name }} </strong> 
                                 </p>
                                 </p>
                                 <!-- {{ appointment.daily_slot_booking.date }}
