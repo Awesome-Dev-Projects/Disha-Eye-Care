@@ -7,8 +7,9 @@
 <style>
     .appointments-container{
         /* margin-top: 1rem; */
-        max-width: min(90%,90%);
-        margin: 0 auto;
+        /* max-width: min(90%,90%);
+        margin: 0 auto; */
+        padding: 2rem 4rem;
       }
       .table{
         margin-top: 2rem;
@@ -388,5 +389,10 @@
   {% endblock %}
   
   {% block script %}
-  
+  <script>
+    $(document).ready(function(){
+      $('.nav_link').removeClass('active');
+      $('#appointments-li').addClass('active');
+    });
+    </script>
   {% endblock %}

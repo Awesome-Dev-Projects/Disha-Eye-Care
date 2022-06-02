@@ -87,10 +87,14 @@
             font-size: 1.6rem;
       }
       .button-div{
-          margin-top:4rem;
+          /* margin-top:4rem; */
           /* margin-left: 4rem; */
-          margin-bottom: 2rem;
+          /* margin-bottom: 2rem; */
+          position: fixed;
+    bottom: 100px;
+    right: 100px;
       }
+      
       .button{
           background-color: #1da1f2;
             color: white;
@@ -99,6 +103,8 @@
             padding: 1rem 6rem;
             font-size: 2rem;
             cursor: pointer;
+            
+            
       }
       .button:hover{
           background-color: #325c76;
@@ -172,7 +178,7 @@
 {% endblock %}
 {% block content %}
 <div class="appointment-home-container">
-    <div class="breadcumb-title-div">
+    <div class="breadcumb-title-div wow fadeInUp">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -184,7 +190,7 @@
           </h2>
     </div>
     <div class="row center-div">
-        <div class="row">
+        <div class="row wow fadeInUp">
             <div class="col-md-6 col-img">
                 <img src="{% static 'img/clinic/undraw_booking_svg.svg' %}" class="img-responsive enter-otp-img" alt="contact us" />
                
@@ -318,9 +324,7 @@
                    </div>       
                    
                  </div>    -->
-                 <div class=" button-div">
-                    <a href="{% url 'patient:check-available-slots' %}" class="button">Let's Get Started</a>
-                   </div>   
+                 
                 <div class="row flex previous-appointment-link-div mt-8">
                     
                     <div class="col-md-12 col-sm-12">
@@ -338,5 +342,9 @@
             </div>
         
     </div>
+    <div class=" button-div">
+        <a href="{% url 'patient:check-available-slots' %}" class="button">Let's Get Started</a>
+       </div>   
 </div>
+
 {% endblock %}

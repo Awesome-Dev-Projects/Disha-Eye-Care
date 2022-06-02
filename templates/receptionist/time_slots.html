@@ -66,8 +66,9 @@
       }
       .time-slots-container{
         /* margin-top: 1rem; */
-        max-width: min(90%,75%);
-        margin: 0 auto;
+        /* max-width: min(90%,75%);
+        margin: 0 auto; */
+        padding: 2rem 4rem;
       }
       .table{
         margin-top: 2rem;
@@ -402,5 +403,10 @@
   {% endblock %}
   
   {% block script %}
-  
+  <script>
+    $(document).ready(function(){
+      $('.nav_link').removeClass('active');
+      $('#time-slots-li').addClass('active');
+    });
+    </script>
   {% endblock %}

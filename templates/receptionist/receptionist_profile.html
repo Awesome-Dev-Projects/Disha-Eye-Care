@@ -6,8 +6,9 @@
  <title>Profile</title>
 <style>
     .receptionist-profile-container{
-        max-width: min(90%,75%);
+        /* max-width: min(90%,75%); */
         margin: 2rem auto;
+        padding: 2rem 4rem;
       }
       .doctor_profile_image,.doctor_certificate_image{
         object-fit: cover;
@@ -432,4 +433,10 @@
           }
         
 </script>
+<script>
+    $(document).ready(function(){
+      $('.nav_link').removeClass('active');
+      $('#profile-li').addClass('active');
+    });
+    </script>
   {% endblock %}

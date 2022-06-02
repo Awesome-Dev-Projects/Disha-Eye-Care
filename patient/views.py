@@ -345,7 +345,7 @@ def get_otp(request):
             OTP.objects.create(phone_no=input_phone_no,
                                secret=totp['secret'], otp=totp['otp'])
             message = f"Your One Time Password for booking an appointment  is {totp['otp']}. Please do not share this OTP with anyone. This OTP is valid for 5 minutes. Thank you."
-            # Fast2SMS.send_sms(str(input_phone_no)[3:], message)
+            Fast2SMS.send_sms(str(input_phone_no)[3:], message)
             return redirect('patient:verify-otp')
 
     template_context = {
@@ -469,7 +469,7 @@ def patient_profile(request):
             else:
                 return HttpResponse("Slot already booked")
             # return redirect('patient:patient-message')
-
+            
     template_context = {
         "patient_profile_form": patient_profile_form,
         "patient_message_form": patient_message_form,
